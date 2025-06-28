@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr. Lelin - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff6b35 100%);
+            border-radius: 15px;
+            padding: 20px 40px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: white;
+            color: #ff8c00;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Home Section */
+        .home-section {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 50px;
+            align-items: center;
+            height: 100%;
+        }
+
+        .profile-container {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .profile-photo {
+            width: 100%;
+            height: 400px;
+            background: #f8f9fa;
+            border: 4px solid #ff8c00;
+            border-radius: 20px;
+            margin: 0 auto 30px;
+            display: block;
+            box-shadow: 0 20px 60px rgba(255, 140, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 80px rgba(255, 140, 0, 0.4);
+        }
+
+        .profile-photo.has-image {
+            background: #fff;
+            border: 4px solid #ff8c00;
+        }
+
+        .profile-photo img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center top !important;
+            border-radius: 16px !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            outline: none !important;
+        }
+
+        /* Remove any overlay elements for profile photo */
+        .profile-photo.has-image .profile-overlay,
+        .profile-photo.has-image .profile-placeholder {
+            display: none !important;
+        }
+
+        /* Fallback for placeholder */
+        .profile-photo:not(.has-image) {
+            border: 3px dashed #ff8c00;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ff8c00;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .profile-placeholder .placeholder-text {
+            font-size: 24px;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .profile-placeholder .placeholder-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .profile-info h1 {
+            color: #ff8c00;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .profile-info h2 {
+            color: #ff6b35;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            color: #ff8c00;
+            font-style: italic;
+            font-size: 1.4em;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .description {
+            color: #666;
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 1.1em;
+        }
+
+        /* Edit Mode */
+        .edit-panel {
+            display: none;
+            background: #fff3cd;
+            border: 2px dashed #ff8c00;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .edit-panel.active {
+            display: block;
+        }
+
+        .edit-group {
+            margin-bottom: 15px;
+        }
+
+        .edit-group label {
+            display: block;
+            font-weight: bold;
+            color: #ff8c00;
+            margin-bottom: 5px;
+        }
+
+        .edit-group input, .edit-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ff8c00;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .edit-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .edit-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .edit-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .save-btn {
+            background: #28a745;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #dc3545;
+            color: white;
+        }
+
+        .edit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Gallery Management in Edit Mode */
+        .gallery-management {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #ff8c00;
+        }
+
+        .gallery-management h4 {
+            color: #ff8c00;
+            margin-bottom: 15px;
+        }
+
+        .gallery-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-edit-btn {
+            background: #ff8c00;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-edit-btn:hover {
+            background: #ff6b35;
+            transform: translateY(-1px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+            height: 100%;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .content-section.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content-section h2 {
+            color: #ff8c00;
+            font-size: 2.8em;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #ff6b35;
+            padding-bottom: 15px;
+        }
+
+        .content-section h3 {
+            color: #ff6b35;
+            font-size: 1.8em;
+            margin: 25px 0 15px 0;
+        }
+
+        .content-section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .skill-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #ff8c00;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 25px 0;
+        }
+
+        .portfolio-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+            flex: 1;
+        }
+
+        .gallery-item {
+            height: 220px;
+            background: #f8f9fa;
+            border: 3px dashed #ff8c00;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ff8c00;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3);
+            border-color: #ff6b35;
+        }
+
+        .gallery-item.has-image {
+            background: none;
+            border: 3px solid #ff8c00;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 12px;
+            display: block;
+        }
+
+        /* Responsive image handling */
+        @media (max-width: 768px) {
+            .profile-photo {
+                width: 100%;
+                height: 300px;
+                display: block;
+            }
+            
+            .profile-photo img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                object-position: center top !important;
+                border-radius: 16px !important;
+                display: block !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-photo {
+                width: 100%;
+                height: 250px;
+                display: block;
+            }
+            
+            .profile-photo img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                object-position: center top !important;
+                border-radius: 16px !important;
+                display: block !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+
+        .gallery-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .gallery-placeholder .placeholder-text {
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .gallery-placeholder .placeholder-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .gallery-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gallery-btn {
+            background: #ff8c00;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-btn:hover {
+            background: #ff6b35;
+            transform: scale(1.05);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            color: #ff8c00;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #ff8c00;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #ff8c00, #ff6b35);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.3);
+        }
+
+        /* Password Modal */
+        .password-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .password-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .password-content h3 {
+            color: #ff8c00;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff8c00;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        }
+
+        .password-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .password-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .password-submit {
+            background: #ff8c00;
+            color: white;
+        }
+
+        .password-cancel {
+            background: #dc3545;
+            color: white;
+        }
+
+        .password-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Photo Upload Modal */
+        .photo-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .photo-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .photo-content h3 {
+            color: #ff8c00;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .upload-options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        .upload-option {
+            flex: 1;
+            padding: 20px;
+            border: 2px dashed #ff8c00;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fff8f0;
+        }
+
+        .upload-option:hover {
+            background: #ff8c00;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .upload-option i {
+            font-size: 2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff8c00;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.3);
+        }
+
+        .photo-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .photo-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .photo-upload {
+            background: #ff8c00;
+            color: white;
+        }
+
+        .photo-cancel {
+            background: #dc3545;
+            color: white;
+        }
+
+        .photo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 15px 20px;
+            }
+
+            .nav-menu {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .home-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .logo {
+                font-size: 2.2em;
+            }
+
+            .profile-info h1 {
+                font-size: 2.5em;
+            }
+
+            .profile-photo {
+                width: 250px;
+                height: 250px;
+            }
+
+            .profile-body {
+                width: 150px;
+                height: 180px;
+            }
+
+            .content-section h2 {
+                font-size: 2.2em;
+            }
+
+            .profile-container {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 12px 15px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 1.8em;
+            }
+
+            .profile-info h1 {
+                font-size: 2em;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .profile-body {
+                width: 120px;
+                height: 150px;
+            }
+
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Photo Upload Modal -->
+        <div class="photo-modal" id="photoModal">
+            <div class="photo-content">
+                <h3>📸 Add Photo to Gallery</h3>
+                <p style="color: #666; margin-bottom: 20px;">Choose how you'd like to add your photo</p>
+                
+                <div class="upload-options">
+                    <div class="upload-option" onclick="triggerFileUpload()">
+                        <span style="font-size: 2em;">📁</span>
+                        <div><strong>Upload File</strong></div>
+                        <small>From your device</small>
+                    </div>
+                    <div class="upload-option" onclick="showUrlInput()">
+                        <span style="font-size: 2em;">🔗</span>
+                        <div><strong>Image URL</strong></div>
+                        <small>From the web</small>
+                    </div>
+                </div>
+
+                <input type="file" id="fileInput" accept="image/*" onchange="handleFileUpload(event)">
+                
+                <div id="urlInputContainer" style="display: none;">
+                    <input type="url" class="url-input" id="imageUrl" placeholder="Paste image URL here..." onkeypress="handleUrlEnter(event)">
+                    <button class="photo-btn photo-upload" onclick="loadImageFromUrl()" style="margin-top: 10px;">🔗 Load Image</button>
+                </div>
+
+                <div id="imagePreview"></div>
+
+                <div id="imageDescriptionContainer" style="display: none; margin-top: 15px;">
+                    <label style="display: block; font-weight: bold; color: #ff8c00; margin-bottom: 5px;">Image Description (Optional):</label>
+                    <input type="text" id="imageDescription" placeholder="Enter description for this image..." style="width: 100%; padding: 10px; border: 2px solid #ff8c00; border-radius: 5px;">
+                    <small style="color: #666; display: block; margin-top: 5px;">This will be shown when hovering over the image</small>
+                </div>
+
+                <div class="photo-buttons">
+                    <button class="photo-btn photo-upload" id="confirmBtn" onclick="confirmPhoto()" style="display: none;">✅ Add Photo</button>
+                    <button class="photo-btn photo-cancel" onclick="closePhotoModal()">❌ Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Password Modal -->
+        <div class="password-modal" id="passwordModal">
+            <div class="password-content">
+                <h3>🔐 Authentication Required</h3>
+                <p style="color: #666; margin-bottom: 20px;">Please enter the password to edit profile and upload photos</p>
+                <input type="password" class="password-input" id="passwordInput" placeholder="Enter password" onkeypress="handlePasswordEnter(event)">
+                <div class="error-message" id="errorMessage">Incorrect password! Please try again.</div>
+                <div class="password-buttons">
+                    <button class="password-btn password-submit" onclick="checkPassword()">🔓 Unlock</button>
+                    <button class="password-btn password-cancel" onclick="closePasswordModal()">❌ Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="logo" onclick="toggleEditMode()">LELIN</div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" onclick="showSection('home')">HOME</button>
+                <button class="nav-btn" onclick="showSection('about')">ABOUT</button>
+                <button class="nav-btn" onclick="showSection('portfolio')">PORTFOLIO</button>
+                <button class="nav-btn" onclick="showSection('gallery')">GALLERY</button>
+                <button class="nav-btn" onclick="showSection('contact')">CONTACT</button>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Edit Panel -->
+            <div class="edit-panel" id="editPanel">
+                <h3 style="color: #ff8c00; margin-bottom: 20px;">✏️ Edit Profile & Photos</h3>
+                
+                <div class="edit-group">
+                    <label>Profile Photo:</label>
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+                        <button class="edit-btn" onclick="uploadProfilePhoto()" style="background: #17a2b8; color: white; padding: 8px 16px;">📷 Upload Photo</button>
+                        <button class="edit-btn" onclick="removeProfilePhoto()" style="background: #dc3545; color: white; padding: 8px 16px;">🗑️ Remove</button>
+                    </div>
+                    <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;" onchange="handleProfilePhotoUpload(event)">
+                    <small style="color: #666;">Click to upload your professional headshot</small>
+                </div>
+
+                <div class="edit-group">
+                    <label>Name:</label>
+                    <input type="text" id="editName" placeholder="Enter your full name">
+                </div>
+                <div class="edit-group">
+                    <label>Job Title:</label>
+                    <input type="text" id="editTitle" placeholder="Enter your job title">
+                </div>
+                <div class="edit-group">
+                    <label>Professional Tagline:</label>
+                    <input type="text" id="editTagline" placeholder="Enter your professional tagline">
+                </div>
+                <div class="edit-group">
+                    <label>About Description:</label>
+                    <textarea id="editDescription" placeholder="Write about yourself and your professional background"></textarea>
+                </div>
+
+                <!-- Gallery Management Section -->
+                <div class="gallery-management">
+                    <h4>📸 Gallery Management</h4>
+                    <p style="color: #666; margin-bottom: 15px; font-size: 14px;">Manage your gallery photos (password protected)</p>
+                    <div class="gallery-buttons">
+                        <button class="gallery-edit-btn" onclick="editGalleryPhoto(0)">Edit Photo 1</button>
+                        <button class="gallery-edit-btn" onclick="editGalleryPhoto(1)">Edit Photo 2</button>
+                        <button class="gallery-edit-btn" onclick="editGalleryPhoto(2)">Edit Photo 3</button>
+                        <button class="gallery-edit-btn" onclick="editGalleryPhoto(3)">Edit Photo 4</button>
+                        <button class="gallery-edit-btn" onclick="editGalleryPhoto(4)">Edit Photo 5</button>
+                        <button class="gallery-edit-btn" onclick="editGalleryPhoto(5)">Edit Photo 6</button>
+                        <button class="gallery-edit-btn" onclick="editGalleryPhoto(6)">Edit Photo 7</button>
+                        <button class="gallery-edit-btn" onclick="editGalleryPhoto(7)">Edit Photo 8</button>
+                    </div>
+                </div>
+
+                <div class="edit-buttons">
+                    <button class="edit-btn save-btn" onclick="saveChanges()">💾 Save Changes</button>
+                    <button class="edit-btn cancel-btn" onclick="cancelEdit()">❌ Cancel</button>
+                </div>
+            </div>
+
+            <!-- Home Section -->
+            <section class="content-section active" id="homeSection">
+                <div class="home-section">
+                    <div class="profile-container">
+                        <div class="profile-photo has-image" id="profilePhoto" style="display: block;">
+                            <img src="images/Lelin.png" alt="Mr. Lelin Profile Photo">
+                        </div>
+                        <div style="color: #ff8c00; font-weight: bold;">Profile Photo</div>
+                    </div>
+                    <div class="profile-info">
+                        <h1 id="displayName">Mr.Lelin</h1>
+                        <h2 id="displayTitle">Senior R&D Executive</h2>
+                        <div class="tagline" id="displayTagline">"Innovating Tomorrow's Technology Today"</div>
+                        <div class="description" id="displayDescription">
+                            Welcome to my professional portfolio. I am a dedicated R&D executive with extensive experience in technology innovation, product development, and strategic planning. My passion lies in transforming innovative ideas into practical solutions that drive business growth and technological advancement.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="content-section" id="aboutSection">
+                <h2>About Me</h2>
+                <p>I am a passionate Senior R&D Executive with over 10 years of experience in driving technological innovation and leading high-performing teams. My expertise spans across multiple domains including artificial intelligence, machine learning, software development, and strategic technology planning.</p>
+                
+                <h3>Professional Experience</h3>
+                <p>Throughout my career, I have successfully led numerous projects from conception to implementation, consistently delivering innovative solutions that have significantly impacted business outcomes. I specialize in identifying emerging technologies and translating them into practical applications that drive competitive advantage.</p>
+                
+                <h3>Core Competencies</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <strong>Technology Innovation</strong>
+                        <p>Leading cutting-edge research and development initiatives</p>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Team Leadership</strong>
+                        <p>Managing cross-functional teams and driving collaboration</p>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Strategic Planning</strong>
+                        <p>Developing long-term technology roadmaps and strategies</p>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Product Development</strong>
+                        <p>From ideation to market launch of innovative products</p>
+                    </div>
+                </div>
+
+                <h3>Education & Certifications</h3>
+                <p>• Master's in Computer Science - Technology University<br>
+                • Certified Project Management Professional (PMP)<br>
+                • Advanced Leadership in Technology Innovation<br>
+                • Machine Learning Specialization Certificate</p>
+            </section>
+
+            <!-- Portfolio Section -->
+            <section class="content-section" id="portfolioSection">
+                <h2>Portfolio</h2>
+                <p>Here are some of the key projects and achievements that showcase my expertise in technology innovation and leadership.</p>
+                
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <h3>AI-Powered Analytics Platform</h3>
+                        <p>Led the development of a comprehensive analytics platform that increased data processing efficiency by 300%. The platform now serves over 10,000 users globally.</p>
+                        <p><strong>Technologies:</strong> Python, TensorFlow, React, AWS</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <h3>Smart IoT Infrastructure</h3>
+                        <p>Designed and implemented a scalable IoT infrastructure for smart city applications, reducing operational costs by 40% and improving service delivery.</p>
+                        <p><strong>Technologies:</strong> IoT, Cloud Computing, Edge AI</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <h3>Mobile Innovation Lab</h3>
+                        <p>Established a mobile innovation lab that has produced 15+ successful mobile applications with over 1 million downloads combined.</p>
+                        <p><strong>Technologies:</strong> React Native, Flutter, Node.js</p>
+                    </div>
+                    <div class="portfolio-item">
+                        <h3>Blockchain Security Solution</h3>
+                        <p>Developed a blockchain-based security solution for financial institutions, enhancing transaction security and reducing fraud by 85%.</p>
+                        <p><strong>Technologies:</strong> Blockchain, Ethereum, Smart Contracts</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section class="content-section" id="gallerySection">
+                <h2>Gallery</h2>
+                <p>A visual showcase of my work, achievements, and professional journey.</p>
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #ff8c00;">
+                    <p style="color: #856404; margin: 0; font-weight: 500;">🔒 <strong>Secure Gallery:</strong> Photos can only be uploaded through password-protected editing mode. Click "LELIN" in the header to login and manage photos.</p>
+                </div>
+                
+                <div class="gallery-grid" id="galleryGrid">
+                    <div class="gallery-item">
+                        <span>Professional Gallery</span>
+                        <div class="gallery-overlay">
+                            🔒 Login to add photos
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <span>Achievement Gallery</span>
+                        <div class="gallery-overlay">
+                            🔒 Login to add photos
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <span>Project Gallery</span>
+                        <div class="gallery-overlay">
+                            🔒 Login to add photos
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <span>Event Gallery</span>
+                        <div class="gallery-overlay">
+                            🔒 Login to add photos
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <span>Team Gallery</span>
+                        <div class="gallery-overlay">
+                            🔒 Login to add photos
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <span>Innovation Gallery</span>
+                        <div class="gallery-overlay">
+                            🔒 Login to add photos
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <span>Conference Gallery</span>
+                        <div class="gallery-overlay">
+                            🔒 Login to add photos
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <span>Award Gallery</span>
+                        <div class="gallery-overlay">
+                            🔒 Login to add photos
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="content-section" id="contactSection">
+                <h2>Contact Me</h2>
+                <p>I'm always interested in discussing new opportunities, innovative projects, and potential collaborations. Feel free to reach out!</p>
+                
+                <div class="contact-form">
+                    <form onsubmit="handleContact(event)">
+                        <div class="form-group">
+                            <label>Name *</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" name="company">
+                        </div>
+                        <div class="form-group">
+                            <label>Subject *</label>
+                            <input type="text" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message *</label>
+                            <textarea name="message" rows="6" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+
+                <div style="margin-top: 40px; text-align: center; color: #666;">
+                    <h3 style="color: #ff8c00;">Professional Contact Information</h3>
+                    <p>📧 Email: mr.lelin@innovation.com</p>
+                    <p>📱 Phone: +1 (555) 123-4567</p>
+                    <p>🌐 LinkedIn: linkedin.com/in/mrlelin</p>
+                    <p>📍 Location: Silicon Valley, CA</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        let editMode = false;
+        let currentSection = 'home';
+        const EDIT_PASSWORD = "lelin123"; // Change this to your desired password
+        
+        // Gallery data storage
+        let galleryData = {};
+        let galleryDescriptions = {};
+        let currentGalleryIndex = -1;
+        let pendingImage = null;
+        let profilePhotoData = null;
+
+        // Profile data storage
+        let profileData = {
+            name: "Mr.Lelin",
+            title: "Senior R&D Executive",
+            tagline: '"Innovating Tomorrow\'s Technology Today"',
+            description: "Welcome to my professional portfolio. I am a dedicated R&D executive with extensive experience in technology innovation, product development, and strategic planning. My passion lies in transforming innovative ideas into practical solutions that drive business growth and technological advancement."
+        };
+
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(s => {
+                s.classList.remove('active');
+            });
+            
+            // Remove active class from all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(section + 'Section').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            currentSection = section;
+            
+            // Hide edit panel when switching sections
+            if (editMode) {
+                toggleEditMode();
+            }
+        }
+
+        function toggleEditMode() {
+            if (!editMode) {
+                // Show password modal before entering edit mode
+                showPasswordModal();
+            } else {
+                // Exit edit mode
+                editMode = false;
+                document.getElementById('editPanel').classList.remove('active');
+                updateProfilePhotoOverlay();
+            }
+        }
+
+        function showPasswordModal() {
+            document.getElementById('passwordModal').classList.add('active');
+            document.getElementById('passwordInput').focus();
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('active');
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
+        function handlePasswordEnter(event) {
+            if (event.key === 'Enter') {
+                checkPassword();
+            }
+        }
+
+        function checkPassword() {
+            const enteredPassword = document.getElementById('passwordInput').value;
+            
+            if (enteredPassword === EDIT_PASSWORD) {
+                // Correct password - enter edit mode
+                closePasswordModal();
+                enterEditMode();
+                showNotification('Authentication successful! Edit mode activated.', 'success');
+            } else {
+                // Incorrect password
+                document.getElementById('errorMessage').classList.add('show');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+                
+                // Shake animation for error
+                const modal = document.querySelector('.password-content');
+                modal.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    modal.style.animation = '';
+                }, 500);
+            }
+        }
+
+        function enterEditMode() {
+            editMode = true;
+            const editPanel = document.getElementById('editPanel');
+            editPanel.classList.add('active');
+            updateProfilePhotoOverlay();
+            
+            // Populate edit fields with current data
+            document.getElementById('editName').value = profileData.name;
+            document.getElementById('editTitle').value = profileData.title;
+            document.getElementById('editTagline').value = profileData.tagline.replace(/"/g, '');
+            document.getElementById('editDescription').value = profileData.description;
+        }
+
+        function updateProfilePhotoOverlay() {
+            const profilePhoto = document.getElementById('profilePhoto');
+            const overlay = profilePhoto.querySelector('.profile-overlay');
+            
+            if (editMode) {
+                overlay.textContent = '📷 Click to Upload Photo';
+                profilePhoto.onclick = uploadProfilePhoto;
+            } else {
+                overlay.textContent = '🔒 Login to upload your professional photo';
+                profilePhoto.onclick = () => showNotification('Please login first to upload photos!', 'info');
+            }
+        }
+
+        function saveChanges() {
+            // Get values from edit fields
+            profileData.name = document.getElementById('editName').value || profileData.name;
+            profileData.title = document.getElementById('editTitle').value || profileData.title;
+            profileData.tagline = '"' + (document.getElementById('editTagline').value || profileData.tagline.replace(/"/g, '')) + '"';
+            profileData.description = document.getElementById('editDescription').value || profileData.description;
+            
+            // Update display
+            document.getElementById('displayName').textContent = profileData.name;
+            document.getElementById('displayTitle').textContent = profileData.title;
+            document.getElementById('displayTagline').textContent = profileData.tagline;
+            document.getElementById('displayDescription').textContent = profileData.description;
+            
+            // Hide edit panel
+            toggleEditMode();
+            
+            // Show success message
+            showNotification('Changes saved successfully!', 'success');
+        }
+
+        function cancelEdit() {
+            toggleEditMode();
+            showNotification('Changes cancelled', 'info');
+        }
+
+        function handleContact(event) {
+            event.preventDefault();
+            showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
+            event.target.reset();
+        }
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slideIn 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Gallery Photo Functions (only accessible in edit mode)
+        function editGalleryPhoto(index) {
+            if (!editMode) {
+                showNotification('Please enter edit mode first!', 'error');
+                return;
+            }
+            
+            currentGalleryIndex = index;
+            document.getElementById('photoModal').classList.add('active');
+            resetPhotoModal();
+            
+            // If editing existing image, populate description
+            if (galleryDescriptions[index]) {
+                document.getElementById('imageDescription').value = galleryDescriptions[index];
+            }
+        }
+
+        function closePhotoModal() {
+            document.getElementById('photoModal').classList.remove('active');
+            resetPhotoModal();
+        }
+
+        function resetPhotoModal() {
+            document.getElementById('urlInputContainer').style.display = 'none';
+            document.getElementById('imageUrl').value = '';
+            document.getElementById('imagePreview').innerHTML = '';
+            document.getElementById('confirmBtn').style.display = 'none';
+            document.getElementById('imageDescriptionContainer').style.display = 'none';
+            document.getElementById('imageDescription').value = '';
+            pendingImage = null;
+        }
+
+        function triggerFileUpload() {
+            document.getElementById('fileInput').click();
+        }
+
+        function showUrlInput() {
+            document.getElementById('urlInputContainer').style.display = 'block';
+            document.getElementById('imageUrl').focus();
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    showImagePreview(e.target.result);
+                    pendingImage = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                showNotification('Please select a valid image file!', 'error');
+            }
+        }
+
+        function handleUrlEnter(event) {
+            if (event.key === 'Enter') {
+                loadImageFromUrl();
+            }
+        }
+
+        function loadImageFromUrl() {
+            const url = document.getElementById('imageUrl').value.trim();
+            if (url) {
+                // Test if image loads
+                const img = new Image();
+                img.onload = function() {
+                    showImagePreview(url);
+                    pendingImage = url;
+                };
+                img.onerror = function() {
+                    showNotification('Failed to load image from URL. Please check the link!', 'error');
+                };
+                img.src = url;
+            }
+        }
+
+        function showImagePreview(src) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = `<img src="${src}" class="preview-image" alt="Preview">`;
+            document.getElementById('confirmBtn').style.display = 'inline-block';
+            document.getElementById('imageDescriptionContainer').style.display = 'block';
+        }
+
+        function confirmPhoto() {
+            if (pendingImage && currentGalleryIndex >= 0) {
+                galleryData[currentGalleryIndex] = pendingImage;
+                const description = document.getElementById('imageDescription').value.trim();
+                if (description) {
+                    galleryDescriptions[currentGalleryIndex] = description;
+                }
+                updateGalleryItem(currentGalleryIndex);
+                closePhotoModal();
+                showNotification('Photo added successfully!', 'success');
+            }
+        }
+
+        function updateGalleryItem(index) {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const item = galleryItems[index];
+            const description = galleryDescriptions[index] || `Gallery Photo ${index + 1}`;
+            
+            if (galleryData[index]) {
+                item.innerHTML = `
+                    <img src="${galleryData[index]}" alt="${description}" title="${description}">
+                    <div class="gallery-overlay">
+                        <div>${description}</div>
+                    </div>
+                `;
+                item.classList.add('has-image');
+            } else {
+                // Reset to default state
+                const defaultTexts = [
+                    'Professional Gallery', 'Achievement Gallery', 'Project Gallery', 'Event Gallery',
+                    'Team Gallery', 'Innovation Gallery', 'Conference Gallery', 'Award Gallery'
+                ];
+                item.innerHTML = `
+                    <span>${defaultTexts[index]}</span>
+                    <div class="gallery-overlay">
+                        🔒 Login to add photos
+                    </div>
+                `;
+                item.classList.remove('has-image');
+            }
+        }
+
+        // Profile Photo Functions
+        function uploadProfilePhoto() {
+            if (!editMode) {
+                showNotification('Please enter edit mode first to upload photos!', 'error');
+                return;
+            }
+            document.getElementById('profilePhotoInput').click();
+        }
+
+        function handleProfilePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePhotoData = e.target.result;
+                    updateProfilePhoto();
+                    showNotification('Profile photo uploaded successfully!', 'success');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                showNotification('Please select a valid image file!', 'error');
+            }
+        }
+
+        function updateProfilePhoto() {
+            const profilePhoto = document.getElementById('profilePhoto');
+            if (profilePhotoData) {
+                profilePhoto.innerHTML = `
+                    <img src="${profilePhotoData}" alt="Profile Photo">
+                    <div class="profile-overlay">
+                        📷 Click to Change Photo
+                    </div>
+                `;
+                profilePhoto.classList.add('has-image');
+            } else {
+                profilePhoto.innerHTML = `
+                    <div class="profile-body"></div>
+                    <div class="profile-overlay">
+                        ${editMode ? '📷 Click to Upload Photo' : '🔒 Login to upload your professional photo'}
+                    </div>
+                `;
+                profilePhoto.classList.remove('has-image');
+            }
+        }
+
+        function removeProfilePhoto() {
+            if (!editMode) {
+                showNotification('Please enter edit mode first!', 'error');
+                return;
+            }
+            if (confirm('Are you sure you want to remove your profile photo?')) {
+                profilePhotoData = null;
+                updateProfilePhoto();
+                showNotification('Profile photo removed!', 'success');
+            }
+        }
+
+        // Add CSS for notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial profile photo to avoid any overlay issues
+            profilePhotoData = 'images/Lelin.png';
+            // Ensure profile photo displays correctly
+            const profilePhoto = document.getElementById('profilePhoto');
+            profilePhoto.style.display = 'block';
+            showNotification('🎯 Portfolio Ready! Your profile photo is loaded. Click "LELIN" to edit content!', 'info');
+        });
+    </script>
+</body>
+</html>
